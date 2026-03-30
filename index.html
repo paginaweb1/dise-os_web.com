@@ -148,9 +148,17 @@ canvas{
     box-shadow:0 10px 25px rgba(0,0,0,0.4);
 }
 
+/* 🔥 IMAGEN CORREGIDA */
 .card img{
-    height:250px;
+    width:100%;
+    aspect-ratio:4/3;
     object-fit:cover;
+    object-position:center;
+    transition:0.4s;
+}
+
+.card:hover img{
+    transform:scale(1.08);
 }
 
 /* BOTON */
@@ -211,7 +219,7 @@ footer{
     <div class="monitor">
         <div class="power"></div>
         <div class="scan"></div>
-        <img src="" class="logo-splash">
+        <img src="logo.png" class="logo-splash">
         <h1>Bienvenidos</h1>
         <p>catalogo paginas web</p>
     </div>
@@ -232,7 +240,7 @@ function comprar(nombre){
 }
 </script>
 
-<!-- 9 CARDS COMPLETAS -->
+<!-- CARDS -->
 
 <div class="col-md-4 col-sm-6"><div class="card h-100">
 <a href="https://paginaweb1.github.io/flores.com/" target="_blank"><img src="1.png"></a>
@@ -333,13 +341,6 @@ anim();
 
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
