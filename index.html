@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -16,57 +16,126 @@ body{
     overflow-x: hidden;
 }
 
-/* Splash */
+/* PARTICULAS */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
+
+/* SPLASH */
 #splash{
     position: fixed;
     width: 100%;
     height: 100vh;
-    background: #ffffff;
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     animation: fadeOut 2s ease forwards;
-    animation-delay: 2.5s;
+    animation-delay: 4s;
 }
 
-#splash img{
-    width: 200px;
-    animation: zoomIn 2s ease;
+/* MONITOR */
+.monitor{
+    width: 340px;
+    height: 240px;
+    border-radius: 15px;
+    position: relative;
+    background: #020305;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-@keyframes zoomIn{
-    from{transform: scale(0.5); opacity:0;}
-    to{transform: scale(1); opacity:1;}
+/* BORDE NEON */
+.monitor::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:15px;
+    border:2px solid #00f0ff;
+    box-shadow:0 0 20px #00f0ff,0 0 40px #00ff9d;
+}
+
+/* LOGO */
+.logo-splash{
+    width:90px;
+    margin-bottom:10px;
+    filter: drop-shadow(0 0 10px #00f0ff);
+}
+
+/* TEXTO */
+.monitor h1{
+    color:#00f0ff;
+    text-shadow:0 0 10px #00f0ff;
+}
+
+.monitor p{
+    color:#00ff9d;
+}
+
+/* SCAN */
+.scan{
+    position:absolute;
+    width:100%;
+    height:3px;
+    background:linear-gradient(90deg,transparent,#00ff9d,transparent);
+    animation:scan 2s linear infinite;
+}
+
+/* ENCENDIDO */
+.power{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#00ff9d;
+    animation:power 1.5s forwards;
+}
+
+/* ANIMACIONES */
+@keyframes power{
+    0%{transform:scaleY(0);}
+    100%{transform:scaleY(1);opacity:0;}
+}
+
+@keyframes scan{
+    0%{top:0;}
+    100%{top:100%;}
 }
 
 @keyframes fadeOut{
-    to{
-        opacity:0;
-        visibility:hidden;
-    }
+    to{opacity:0;visibility:hidden;}
 }
 
 #contenido{
+    position:relative;
+    z-index:2;
     opacity:0;
-    animation: showContent 1s ease forwards;
-    animation-delay: 3s;
+    animation:showContent 1s ease forwards;
+    animation-delay:4.5s;
 }
 
 @keyframes showContent{
     to{opacity:1;}
 }
 
+/* TITULO */
 .titulo{
     text-align:center;
     color:#ffffff;
     font-weight:bold;
     margin-top:50px;
     margin-bottom:40px;
-    letter-spacing:2px;
 }
 
-/* Cards */
+/* CARDS */
 .card{
     border:none;
     border-radius:15px;
@@ -84,13 +153,17 @@ body{
     object-fit:cover;
 }
 
-/* Enlace card */
-.card-link{
-    text-decoration:none;
-    color:inherit;
+/* BOTON */
+.btn-comprar{
+    background:#25D366;
+    color:#fff;
+    border:none;
+    border-radius:20px;
+    padding:6px 15px;
+    margin-top:10px;
 }
 
-/* WhatsApp */
+/* WHATSAPP */
 .whatsapp-float{
     position:fixed;
     bottom:20px;
@@ -104,16 +177,11 @@ body{
     justify-content:center;
     align-items:center;
     font-size:30px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
     z-index:1000;
     text-decoration:none;
 }
 
-.whatsapp-float:hover{
-    background:#1ebe5d;
-}
-
-/* Footer */
+/* FOOTER */
 footer{
     background:#1c2833;
     color:#fff;
@@ -126,165 +194,160 @@ footer{
     color:#fff;
     font-size:22px;
     margin:0 10px;
-    transition:0.3s;
-}
-
-.social-icons a:hover{
-    color:#25D366;
 }
 
 </style>
 </head>
 <body>
 
-<!-- Splash Logo -->
+<!-- PARTICULAS -->
+<canvas id="particles"></canvas>
+
+<!-- SONIDO -->
+<audio id="sound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3"></audio>
+
+<!-- SPLASH -->
 <div id="splash">
-    <img src="logo.png" alt="Logo">
+    <div class="monitor">
+        <div class="power"></div>
+        <div class="scan"></div>
+        <img src="" class="logo-splash">
+        <h1>Bienvenidos</h1>
+        <p>catalogo paginas web</p>
+    </div>
 </div>
 
-<!-- Contenido -->
+<!-- CONTENIDO -->
 <div id="contenido" class="container">
 
 <h2 class="titulo">CATALOGO DE PAGINAS DISPONIBLES</h2>
 
 <div class="row g-4 mb-5">
 
-<!-- CARD 1 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/flores.com/" class="card-link">
-<div class="card h-100">
-<img src="1.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 1</h5>
-<p>Una página web profesional aumenta ventas. 🌸✨.</p>
-</div>
-</div>
-</a>
-</div>
+<script>
+function comprar(nombre){
+    let numero="573209304898";
+    let mensaje="Hola, quiero comprar: "+nombre;
+    window.open("https://wa.me/"+numero+"?text="+encodeURIComponent(mensaje));
+}
+</script>
 
-<!-- CARD 2 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/floristeria1/" class="card-link">
-<div class="card h-100">
-<img src="2.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 2</h5>
-<p>Una página web profesional genera confianza.🌸🌸</p>
-</div>
-</div>
-</a>
-</div>
+<!-- 9 CARDS COMPLETAS -->
 
-<!-- CARD 3 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/florister-as/" class="card-link">
-<div class="card h-100">
-<img src="3.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 3</h5>
-<p>muestra tu catálogo 24/7.🌸🌸</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/flores.com/" target="_blank"><img src="1.png"></a>
+<div class="card-body text-center"><h5>Página Web 1</h5><p>Aumenta ventas 🌸</p>
+<button class="btn-comprar" onclick="comprar('Página Web 1')">Comprar</button></div></div></div>
 
-<!-- CARD 4 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/carros.com/" class="card-link">
-<div class="card h-100">
-<img src="4.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 4</h5>
-<p>Convierte visitantes en clientes fieles.🚗🚗</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/floristeria1/" target="_blank"><img src="2.png"></a>
+<div class="card-body text-center"><h5>Página Web 2</h5><p>Genera confianza 🌸</p>
+<button class="btn-comprar" onclick="comprar('Página Web 2')">Comprar</button></div></div></div>
 
-<!-- CARD 5 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/fruver/" class="card-link">
-<div class="card h-100">
-<img src="5.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 5</h5>
-<p>Tu fruver online vende más, atrae clientes diarios.🥬🍓</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/florister-as/" target="_blank"><img src="3.png"></a>
+<div class="card-body text-center"><h5>Página Web 3</h5><p>Catálogo 24/7 🌸</p>
+<button class="btn-comprar" onclick="comprar('Página Web 3')">Comprar</button></div></div></div>
 
-<!-- CARD 6 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/cafe-artesanal.com/" class="card-link">
-<div class="card h-100">
-<img src="6.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 6</h5>
-<p>Tu café online atrae clientes y multiplica ventas.☕</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/carros.com/" target="_blank"><img src="4.png"></a>
+<div class="card-body text-center"><h5>Página Web 4</h5><p>Convierte clientes 🚗</p>
+<button class="btn-comprar" onclick="comprar('Página Web 4')">Comprar</button></div></div></div>
 
-<!-- CARD 7 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/salon-de-belleza/" class="card-link">
-<div class="card h-100">
-<img src="7.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 7</h5>
-<p>Tu salón online agenda citas y aumenta ingresos.💄✨</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/fruver/" target="_blank"><img src="5.png"></a>
+<div class="card-body text-center"><h5>Página Web 5</h5><p>Más clientes 🥬</p>
+<button class="btn-comprar" onclick="comprar('Página Web 5')">Comprar</button></div></div></div>
 
-<!-- CARD 8 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/Asesor-a-transito/" class="card-link">
-<div class="card h-100">
-<img src="8.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 8</h5>
-<p>Tu asesoría online capta clientes y genera confianza.🚗📄</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/cafe-artesanal.com/" target="_blank"><img src="6.png"></a>
+<div class="card-body text-center"><h5>Página Web 6</h5><p>Multiplica ventas ☕</p>
+<button class="btn-comprar" onclick="comprar('Página Web 6')">Comprar</button></div></div></div>
 
-<!-- CARD 9 -->
-<div class="col-md-4 col-sm-6">
-<a href="https://paginaweb1.github.io/paginas-web-creativas/" class="card-link">
-<div class="card h-100">
-<img src="9.png" class="card-img-top">
-<div class="card-body text-center">
-<h5>Página Web 9</h5>
-<p>Tu página web vende más y fortalece tu marca.🚀</p>
-</div>
-</div>
-</a>
-</div>
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/salon-de-belleza/" target="_blank"><img src="7.png"></a>
+<div class="card-body text-center"><h5>Página Web 7</h5><p>Aumenta ingresos 💄</p>
+<button class="btn-comprar" onclick="comprar('Página Web 7')">Comprar</button></div></div></div>
+
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/Asesor-a-transito/" target="_blank"><img src="8.png"></a>
+<div class="card-body text-center"><h5>Página Web 8</h5><p>Genera confianza 🚗</p>
+<button class="btn-comprar" onclick="comprar('Página Web 8')">Comprar</button></div></div></div>
+
+<div class="col-md-4 col-sm-6"><div class="card h-100">
+<a href="https://paginaweb1.github.io/paginas-web-creativas/" target="_blank"><img src="9.png"></a>
+<div class="card-body text-center"><h5>Página Web 9</h5><p>Fortalece tu marca 🚀</p>
+<button class="btn-comprar" onclick="comprar('Página Web 9')">Comprar</button></div></div></div>
 
 </div>
 </div>
 
-<!-- WhatsApp -->
-<a href="https://wa.me/573209304898" class="whatsapp-float" target="_blank">
+<!-- WHATSAPP -->
+<a href="https://wa.me/573209304898" class="whatsapp-float">
 <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
 <p>© 2026 ICC - Todos los derechos reservados</p>
 <div class="social-icons">
 <a href="https://www.facebook.com/disenosicc/" target="_blank"><i class="fab fa-facebook"></i></a>
-<a href="https://www.instagram.com/disenosic2/?next=%2F"><i class="fab fa-instagram"></i></a>
+<a href="https://www.instagram.com/disenosic2/" target="_blank"><i class="fab fa-instagram"></i></a>
 </div>
 </footer>
 
+<script>
+
+/* SONIDO */
+window.onload = () => {
+    setTimeout(()=>{
+        document.getElementById("sound").play();
+    },500);
+};
+
+/* PARTICULAS */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let p=[];
+for(let i=0;i<80;i++){
+p.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,v:Math.random()*1});
+}
+
+function anim(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#00ff9d";
+p.forEach(e=>{
+e.y+=e.v;
+if(e.y>canvas.height)e.y=0;
+ctx.fillRect(e.x,e.y,2,2);
+});
+requestAnimationFrame(anim);
+}
+anim();
+
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
